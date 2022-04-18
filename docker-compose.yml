@@ -1,4 +1,4 @@
-version: '2.0'
+version: '2'
 services:
     app:
         image: node-project:latest
@@ -7,3 +7,12 @@ services:
             - './:/app'
         ports: 
             - 80:80
+        depends_on:
+            - mongo
+
+    mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - './data/:/data'
