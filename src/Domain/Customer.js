@@ -1,6 +1,8 @@
-function Customer(age, name) {
-    this.name = name || null;
-    this.age  = age  || null;
+function Customer(dataFill) {
+    this.name = null;
+    this.age  = null;
+
+    this.fill(dataFill);
 }
 
 Customer.prototype.getAge = function() {
@@ -21,14 +23,20 @@ Customer.prototype.setName = function(name) {
 
 Customer.prototype.validate = function() {
     validation = true;
+    message = '';
 
     if(this.name == 'undefined' || this.name == '' || this.name == null) {
         validation = false;
-        console.log("El name esta mal");
+        message += 'name is not defined';
     }
+
     if(this.age == 'undefined' || this.age == null) {
         validation = false;
-        console.log("El age esta mal");
+        message += ' age is not defined';
+    }
+
+    if(!validation) {
+        throw new Error('The customer model could not be successfully instantiated; '+ message)
     }
 
     return validation;
@@ -43,6 +51,7 @@ Customer.prototype.fill = function(newFields) {
         }
     }
 
+    this.validate();
 };
 
 Customer.prototype.toData = function(newFields) {

@@ -24,14 +24,10 @@ app.post('/customer', function (req, res) {
         "age": 30
     }
     */
-    customer = new Customer();
-    customer.fill(req.body);
-    if(customer.validate()) {    
-        mongo.save(customer.toData());
-        res.send('Saved!');
-    } else {
-        res.send('Error to save model Customer');
-    }
+    
+    customer = new Customer(req.body);
+    mongo.save(customer.toData());
+    res.send('Saved!');
 });
 
 console.log('Api ready... on 0.0.0.0:80')
