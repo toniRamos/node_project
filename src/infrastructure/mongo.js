@@ -6,11 +6,11 @@ client = new MongoClient(uri);
 
 module.exports = {
 
-async save(data) {
+async save(collection, data) {
     try {
         await client.connect();
         const database = client.db("mydb");
-        const haiku = database.collection("customers");
+        const haiku = database.collection(collection);
         const result = await haiku.insertOne(data);
     } finally {
         await  client.close();

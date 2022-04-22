@@ -26,7 +26,7 @@ app.post('/customer', function (req, res) {
     */
     
     customer = new Customer(req.body);
-    mongo.save(customer.toData());
+    mongo.save("customers",customer.toData());
     res.send('Saved!');
 });
 
